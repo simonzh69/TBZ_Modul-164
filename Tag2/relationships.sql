@@ -1,0 +1,23 @@
+CREATE SCHEMA m164_tag2 DEFAULT CHARACTER SET utf8mb4;
+
+USE m164_tag2;
+
+CREATE TABLE Person (
+  PersonID INT PRIMARY KEY AUTO_INCREMENT,
+  Name VARCHAR(50),
+  Vorname VARCHAR(30)
+);
+
+CREATE TABLE Kleidung (
+  KleidungID INT PRIMARY KEY AUTO_INCREMENT,
+  PersonID INT,
+  Typ VARCHAR(50),
+  FOREIGN KEY (PersonID) REFERENCES Person(PersonID)
+);
+
+CREATE TABLE Ausweis (
+  PersonID INT,
+  AusweisNummer VARCHAR(20),
+  PRIMARY KEY (PersonID, AusweisNummer),
+  FOREIGN KEY (PersonID) REFERENCES Person(PersonID)
+);

@@ -1,0 +1,41 @@
+-- Fahrer
+CREATE TABLE Fahrer (
+  FahrerID INT PRIMARY KEY AUTO_INCREMENT,
+  Name VARCHAR(100) NOT NULL,
+  Fuehrerscheinklasse VARCHAR(10) NOT NULL
+);
+ 
+-- Disponent
+CREATE TABLE Disponent (
+  DisponentID INT PRIMARY KEY AUTO_INCREMENT,
+  Name VARCHAR(100) NOT NULL
+);
+ 
+-- Fahrzeug
+CREATE TABLE Fahrzeug (
+  FahrzeugID INT PRIMARY KEY AUTO_INCREMENT,
+  Kennzeichen VARCHAR(20) NOT NULL UNIQUE,
+  Kapazitaet INT NOT NULL
+);
+ 
+-- Tour
+CREATE TABLE Tour (
+  TourID INT PRIMARY KEY AUTO_INCREMENT,
+  Datum DATE NOT NULL,
+  Startzeit TIME NOT NULL,
+  FahrerID INT NOT NULL,
+  DisponentID INT NOT NULL,
+  FahrzeugID INT NOT NULL,
+  FOREIGN KEY (FahrerID) REFERENCES Fahrer(FahrerID),
+  FOREIGN KEY (DisponentID) REFERENCES Disponent(DisponentID),
+  FOREIGN KEY (FahrzeugID) REFERENCES Fahrzeug(FahrzeugID)
+);
+ 
+-- Stopp
+CREATE TABLE Stopp (
+  StoppID INT PRIMARY KEY AUTO_INCREMENT,
+  Adresse VARCHAR(255) NOT NULL,
+  Reihenfolge INT NOT NULL,
+  TourID INT NOT NULL,
+  FOREIGN KEY (TourID) REFERENCES Tour(TourID)
+);
